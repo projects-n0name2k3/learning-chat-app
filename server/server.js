@@ -5,15 +5,16 @@ import messageRoutes from "./routes/message.route.js";
 import userRoutes from "./routes/user.route.js";
 import connectToMG from "./db/connectToMG.js";
 import cookieParser from "cookie-parser";
+import cors from "cors";
+import { app, server } from "./socket/socket.js";
 dotenv.config();
 
-const app = express();
 app.use(cookieParser());
 app.use(express.json());
-
-app.listen(3000, () => {
+app.use(cors());
+server.listen(3001, () => {
   connectToMG();
-  console.log("Server is running on port 3000");
+  console.log("Server is running on port 3001");
 });
 
 app.use("/api/auth", authRoutes);
